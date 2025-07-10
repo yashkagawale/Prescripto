@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+
+
+/*----Navbar----*/
+.active hr {
+    @apply block
+}
