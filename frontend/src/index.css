@@ -6,3 +6,10 @@
 .active hr {
     @apply block
 }
+
+
+/*----specialitymenu----*/
+
+::-webkit-scrollbar {
+    @apply hidden
+}
