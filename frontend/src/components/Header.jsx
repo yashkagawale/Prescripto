@@ -13,7 +13,7 @@ const Header = () => {
                 Book Appointment <br /> With Trusted Doctors
             </p>
             <div className="flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light">
-                <img className='w-28' src={assets.group_profiles} alt="" />
+                <img className='w-20 sm:w-24 md:w-28 lg:w-32' src={assets.group_profiles} alt="" />
                 <p>
                     Simply browse through our extensive list of trusted doctors, <br className='hidden sm:block' /> schedule your appointment hassle-free.
                 </p>
