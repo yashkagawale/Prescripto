@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Outfit:wght@500&family=Poppins&display=swap');
+
 :root {
   --color-primary: #5F6FFF;
 }
@@ -11,5 +13,10 @@
 /* Inside your global CSS (e.g., index.css or input.css) */
 .input-style {
   @apply px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition;
+}
+
+
+*{
+  font-family: outfit;
 }
 
