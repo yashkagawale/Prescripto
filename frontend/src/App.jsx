@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 /**
  * Pages
  */
@@ -23,6 +24,7 @@ import Footer from './components/Footer'
 const App = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />}/>
