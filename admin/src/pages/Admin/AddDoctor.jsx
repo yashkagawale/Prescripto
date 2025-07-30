@@ -3,7 +3,7 @@ import { assets } from "../../assets/assets";
 import { useContext } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { toast } from "react-toastify";
-import axios from "axios"
+import axios from "axios";
 
 const AddDoctor = () => {
   const [docImg, setDocImg] = useState(false);
@@ -28,49 +28,55 @@ const AddDoctor = () => {
         return toast.error("Image not selected");
       }
 
-      const formData = new FormData()
+      const formData = new FormData();
 
-      formData.append('image',docImg)
-      formData.append('name',name)
-      formData.append('email',email)
-      formData.append('password',password)
-      formData.append('experience',experience)
-      formData.append('fees',Number(fees))
-      formData.append('speciality',speciality)
-      formData.append('degree',degree)
-      formData.append('address',JSON.stringify({line1:address1,line2:address2}))
-      formData.append('about',about)
+      formData.append("image", docImg);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("experience", experience);
+      formData.append("fees", Number(fees));
+      formData.append("speciality", speciality);
+      formData.append("degree", degree);
+      formData.append(
+        "address",
+        JSON.stringify({ line1: address1, line2: address2 })
+      );
+      formData.append("about", about);
 
       // console log formdata
-      formData.forEach((value,key) => {
+      formData.forEach((value, key) => {
         console.log(`${key} : ${value}`);
-      })
+      });
 
-      const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData, {headers: { aToken }})
+      const { data } = await axios.post(
+        backendUrl + "/api/admin/add-doctor",
+        formData,
+        { headers: { aToken } }
+      );
 
       if (data.success) {
-        toast.success(data.message)
-        setDocImg(false)
-        setName('')
-        setEmail('')
-        setPassword('')
-        setFees('')
-        setDegree('')
-        setAddress1('')
-        setAddress2('')
-        setAbout('')
+        toast.success(data.message);
+        setDocImg(false);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setFees("");
+        setDegree("");
+        setAddress1("");
+        setAddress2("");
+        setAbout("");
       } else {
-        toast.error(data.message)
+        toast.error(data.message);
       }
-
     } catch (error) {
-      toast.error(error.message)
-      console.log(error)
+      toast.error(error.message);
+      console.log(error);
     }
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="w-full max-w-4xl mt-10 m-5">
+    <form onSubmit={onSubmitHandler} className="w-full max-w-4xl m-5">
       <p className="mb-3 text-lg font-medium">Add Doctor</p>
 
       <div className="bg-white px-8 py-8 border border-gray-300 rounded-xl shadow-md w-full max-h-[80vh] overflow-y-auto space-y-6">
