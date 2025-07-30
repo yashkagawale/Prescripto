@@ -1,13 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
+import { AppContext } from '../context/AppContext'
+import { toast } from 'react-toastify'
+
 
 const Navbar = () => {
-  const navigate = useNavigate()
-  const [showMenu, setShowMenu] = useState(false)
-  const [token, setToken] = useState(true)
-  const [showDropdown, setShowDropdown] = useState(false)
 
+  const navigate = useNavigate()
+
+  const {token, setToken} = useContext(AppContext)
+
+  const [showMenu, setShowMenu] = useState()
+
+  const logout = () => {
+    setToken(false)
+    localStorage.removeItem('token')
+    toast.success('Logged out successfully');
+    navigate('/login');
+    setShowDropdown(false)
+  }
+
+  const [showDropdown, setShowDropdown] = useState(false)
   const dropdownRef = useRef()
 
   const toggleDropdown = () => {
@@ -41,15 +55,17 @@ const Navbar = () => {
 
       <div className="flex items-center gap-4">
         {token ? (
-          <div ref={dropdownRef} className="relative flex items-center gap-2 cursor-pointer" onClick={toggleDropdown}>
-            <img className='w-8 rounded-full' src={assets.profile_pic} alt="Profile Pic" />
-            <img className='w-2.5' src={assets.dropdown_icon} alt="Dropdown Icon" />
+          <div ref={dropdownRef} className="relative flex items-center gap-2 cursor-pointer">
+            <div onClick={toggleDropdown} className="flex items-center gap-2">
+              <img className='w-8 rounded-full' src={assets.profile_pic} alt="Profile Pic" />
+              <img className='w-2.5' src={assets.dropdown_icon} alt="Dropdown Icon" />
+            </div>
             {showDropdown && (
               <div className="absolute right-0 top-12 text-base font-medium text-gray-600 z-20">
                 <div className="min-w-48 bg-gray-50 rounded flex flex-col gap-4 p-4 shadow-lg">
                   <p onClick={() => {navigate('/my-profile'); setShowDropdown(false)}} className='hover:text-black cursor-pointer'>My Profile</p>
                   <p onClick={() => {navigate('/my-appointments'); setShowDropdown(false)}} className='hover:text-black cursor-pointer'>My Appointments</p>
-                  <p onClick={() => {setToken(false); setShowDropdown(false)}} className='hover:text-black cursor-pointer'>Logout</p>
+                  <p onClick={logout} className='hover:text-black cursor-pointer'>Logout</p>
                 </div>
               </div>
             )}
